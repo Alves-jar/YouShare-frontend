@@ -1,1 +1,41 @@
-<p>upload-video works!</p>
+<div class="upload-video-container">
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>Upload Video</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Title</mat-label>
+          <input matInput [(ngModel)]="title" name="title" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput [(ngModel)]="description" name="description" rows="4"></textarea>
+        </mat-form-field>
+
+        <div class="file-input">
+          <input type="file" accept="video/*" (change)="onFileSelected($event)" #fileInput hidden>
+          <button mat-stroked-button type="button" (click)="fileInput.click()">
+            <mat-icon>attach_file</mat-icon>
+            {{ selectedFile ? selectedFile.name : 'Choose Video File' }}
+          </button>
+        </div>
+
+        <div *ngIf="error" class="error-message">
+          {{ error }}
+        </div>
+
+        <div class="button-row">
+          <button mat-button type="button" routerLink="/dashboard">Cancel</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="loading">
+            <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+            <span *ngIf="!loading">Upload Video</span>
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -50,6 +50,10 @@ export class AuthService {
     return !!this.getToken();
   }
 
+  isLoggedIn(): boolean {
+    return !!this.getToken();
+  }
+
   getCurrentUser(): User | null {
     return this.currentUserSubject.value;
   }
